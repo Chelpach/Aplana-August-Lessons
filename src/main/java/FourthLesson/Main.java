@@ -29,7 +29,7 @@ public class Main {
 
         //вывод ТОП 3 игроков
         System.out.println("Топ 3 игроков по очкам:");
-        printTop3NameAndScoreByDesc(players);
+        printTop3NamesByDesc(players);
     }
 
     //создание Map из объектов Player
@@ -69,7 +69,7 @@ public class Main {
     }
 
     //вывод ТОП 3 игроков
-    private static void printTop3NameAndScoreByDesc(Map<String, Integer> players) {
+    private static void printTop3NamesByDesc(Map<String, Integer> players) {
         int i = 0;
         for (Map.Entry<String, Integer> item : (sortMap(players))) {
             if (i < 3) {
