@@ -41,14 +41,12 @@ public class Main {
     }
 
     //Сортировка по очкам
-    private static List<Map.Entry<String, Integer>> sortMap2(Map<String, Integer> players) {
+    private static List<Map.Entry<String, Integer>> sortMap(Map<String, Integer> players) {
         List<Map.Entry<String, Integer>> sortedList = new ArrayList<>(players.entrySet());
         Collections.sort(sortedList, new Comparator<Map.Entry<String, Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                int v1 = o1.getValue();
-                int v2 = o2.getValue();
-                return (v1 < v2) ? 1 : (v1 == v2) ? 0 : -1;
+                return (o1.getValue() < o2.getValue()) ? 1 : (o1.getValue() == o2.getValue()) ? 0 : -1;
             }
         });
         return sortedList;
@@ -56,7 +54,7 @@ public class Main {
 
     //вывод очков по убыванию
     private static void printScoreByDesc(Map<String, Integer> players) {
-        for (Map.Entry<String, Integer> item : (sortMap2(players))
+        for (Map.Entry<String, Integer> item : (sortMap(players))
                 ) {
             System.out.println(item.getValue());
         }
@@ -64,7 +62,7 @@ public class Main {
 
     // вывод Имён игроков и очков по убыванию
     private static void printNameAndScoreByDesc(Map<String, Integer> players) {
-        for (Map.Entry<String, Integer> item : (sortMap2(players))
+        for (Map.Entry<String, Integer> item : (sortMap(players))
                 ) {
             System.out.println(format("%s %s", item.getKey(), item.getValue()));
         }
@@ -73,7 +71,7 @@ public class Main {
     //вывод ТОП 3 игроков
     private static void printTop3NameAndScoreByDesc(Map<String, Integer> players) {
         int i = 0;
-        for (Map.Entry<String, Integer> item : (sortMap2(players))) {
+        for (Map.Entry<String, Integer> item : (sortMap(players))) {
             if (i < 3) {
                 System.out.println(item.getKey());
                 i++;
