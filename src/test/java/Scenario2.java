@@ -38,69 +38,64 @@ public class Scenario2 {
 //Нажатие на кнопку "Страхование путешественников"
         Wait<WebDriver> wait = new WebDriverWait(driver, 10, 1000);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.linkText("Страхование путешественников"))));
-
         driver.findElement(By.linkText("Страхование путешественников")).click();
-
-        assertEquals("Страхование путешественников",driver.findElement(By.xpath(".//*[@id='main']/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[3]/div/div/div/div/h1")).getAttribute("Страхование путешественников"));
+//Проверка наличия на странице заголовка
+        assertEquals("Страхование путешественников", driver.findElement(By.xpath("//*/div/div[3]/div/div/div/div/h1")).getText());
+        assertEquals("«Сбербанк» - Страхование путешественников", driver.getTitle());
 //Нажатие на кнопку "Страхование путешественников"
         driver.findElement(By.cssSelector("li.active > a > span")).click();
+//Нажать оформить онлайн
         driver.findElement(By.cssSelector("p > a > img")).click();
-        // ERROR: Caught exception [ERROR: Unsupported command [selectWindow | null | ]]
-        //driver.switchTo().window("Сбербанк страхование");
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
-
         for (String winHandle : driver.getWindowHandles()) {
             driver.switchTo().window(winHandle);
         }
-
 //driver.switchTo().window(windowHandler);
-//минимальная
+//Выбор суммы страховой защиты-минимальная
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@id='views']/form/section/section/section[2]/div[1]/div[1]/div/div[2]"))));
         driver.findElement(By.xpath(".//*[@id='views']/form/section/section/section[2]/div[1]/div[1]/div/div[2]")).click();
-        Thread.sleep(5000);
-//оформить
+//Нажать оформить
         driver.findElement(By.xpath(".//*[@id='views']/form/section/section/section[6]/span/span")).click();
-
+//Заполнение полей застрахованных
         driver.findElement(By.name("insured0_surname")).clear();
         driver.findElement(By.name("insured0_surname")).sendKeys("IVANOV");
         driver.findElement(By.name("insured0_name")).clear();
         driver.findElement(By.name("insured0_name")).sendKeys("IVAN");
-
-
-        driver.findElement(By.xpath("/html/body/div[1]/div/section/form/section/section[1]/div/insured-input/div/fieldset[4]/div/img")).click();
+        driver.findElement(By.xpath("//*/section/section[1]/div/insured-input/div/fieldset[4]/div/input")).click();
         driver.findElement(By.xpath("/html/body/div[3]/table/tbody/tr[2]/td[2]/a")).click();
-
+//Заполнение полей страхователя
         driver.findElement(By.name("surname")).clear();
         driver.findElement(By.name("surname")).sendKeys("Петров");
         driver.findElement(By.name("name")).clear();
         driver.findElement(By.name("name")).sendKeys("Петр");
         driver.findElement(By.name("middlename")).clear();
         driver.findElement(By.name("middlename")).sendKeys("Петрович");
-
-        driver.findElement(By.xpath("/html/body/div[1]/div/section/form/section/section[2]/div/fieldset[7]/div/img")).click();
+        driver.findElement(By.xpath("//*/section/section[2]/div/fieldset[7]/div/input")).click();
         driver.findElement(By.xpath("/html/body/div[3]/table/tbody/tr[1]/td[5]/a")).click();
+//Данные паспорта РФ
         driver.findElement(By.name("passport_series")).clear();
         driver.findElement(By.name("passport_series")).sendKeys("1111");
         driver.findElement(By.name("passport_number")).clear();
         driver.findElement(By.name("passport_number")).sendKeys("123456");
-        driver.findElement(By.xpath("/html/body/div[1]/div/section/form/section/section[3]/div/fieldset[2]/div/img")).click();
+        driver.findElement(By.xpath("//*/section/section[3]/div/fieldset[2]/div/input")).click();
         driver.findElement(By.xpath("/html/body/div[3]/table/tbody/tr[2]/td[2]/a")).click();
         driver.findElement(By.name("issuePlace")).clear();
         driver.findElement(By.name("issuePlace")).sendKeys("Москва, ОВД 13");
+//Нажатие кнопки продолжить
         driver.findElement(By.cssSelector("span.b-continue-btn")).click();
-
-        assertEquals("IVANOV",driver.findElement(By.name("insured0_surname")).getAttribute("IVANOV"));
-        assertEquals("IVAN",driver.findElement(By.name("insured0_name")).getAttribute("IVAN"));
-        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
-        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
-        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
-        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
-        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
-        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
-        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
-
-
-
+//проверка данных
+        assertEquals("IVANOV", driver.findElement(By.name("insured0_surname")).getAttribute("value"));
+        assertEquals("IVAN", driver.findElement(By.name("insured0_name")).getAttribute("value"));
+        assertEquals("05.09.2017", driver.findElement(By.xpath("//*/section/section[1]/div/insured-input/div/fieldset[4]/div/input")).getAttribute("value"));
+        assertEquals("Петров", driver.findElement(By.name("surname")).getAttribute("value"));
+        assertEquals("Петр", driver.findElement(By.name("name")).getAttribute("value"));
+        assertEquals("Петрович", driver.findElement(By.name("middlename")).getAttribute("value"));
+        assertEquals("03.09.1999", driver.findElement(By.xpath("//*/section/section[2]/div/fieldset[7]/div/input")).getAttribute("value"));
+        assertEquals("1111", driver.findElement(By.name("passport_series")).getAttribute("value"));
+        assertEquals("123456", driver.findElement(By.name("passport_number")).getAttribute("value"));
+        assertEquals("05.09.2017", driver.findElement(By.xpath("//*/section/section[3]/div/fieldset[2]/div/input")).getAttribute("value"));
+        assertEquals("Москва, ОВД 13", driver.findElement(By.name("issuePlace")).getAttribute("value"));
+//Проверка появления сообщения "Заполнены не все обязательные поля"
+        assertTrue(isElementPresent(By.xpath("//*[text()='Заполнены не все обязательные поля']")));
     }
 
     @After
