@@ -40,6 +40,8 @@ public class Scenario2 {
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.linkText("Страхование путешественников"))));
 
         driver.findElement(By.linkText("Страхование путешественников")).click();
+
+        assertEquals("Страхование путешественников",driver.findElement(By.xpath(".//*[@id='main']/div/div/div/div/div/div/div[2]/div[2]/div/div/div/div[1]/div/div[3]/div/div/div/div/h1")).getAttribute("Страхование путешественников"));
 //Нажатие на кнопку "Страхование путешественников"
         driver.findElement(By.cssSelector("li.active > a > span")).click();
         driver.findElement(By.cssSelector("p > a > img")).click();
@@ -66,7 +68,7 @@ public class Scenario2 {
 
 
         driver.findElement(By.xpath("/html/body/div[1]/div/section/form/section/section[1]/div/insured-input/div/fieldset[4]/div/img")).click();
-        driver.findElement(By.xpath("/html/body/div[3]/table/tbody/tr[2]/td[5]/a")).click();
+        driver.findElement(By.xpath("/html/body/div[3]/table/tbody/tr[2]/td[2]/a")).click();
 
         driver.findElement(By.name("surname")).clear();
         driver.findElement(By.name("surname")).sendKeys("Петров");
@@ -86,6 +88,17 @@ public class Scenario2 {
         driver.findElement(By.name("issuePlace")).clear();
         driver.findElement(By.name("issuePlace")).sendKeys("Москва, ОВД 13");
         driver.findElement(By.cssSelector("span.b-continue-btn")).click();
+
+        assertEquals("IVANOV",driver.findElement(By.name("insured0_surname")).getAttribute("IVANOV"));
+        assertEquals("IVAN",driver.findElement(By.name("insured0_name")).getAttribute("IVAN"));
+        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
+        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
+        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
+        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
+        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
+        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
+        assertEquals("IVANOV",driver.findElement(By.name("surname")).getAttribute("IVANOV"));
+
 
 
     }
