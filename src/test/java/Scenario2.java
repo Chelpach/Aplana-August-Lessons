@@ -49,7 +49,6 @@ public class Scenario2 {
         for (String winHandle : driver.getWindowHandles()) {
             driver.switchTo().window(winHandle);
         }
-//driver.switchTo().window(windowHandler);
 //Выбор суммы страховой защиты-минимальная
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@id='views']/form/section/section/section[2]/div[1]/div[1]/div/div[2]"))));
         driver.findElement(By.xpath(".//*[@id='views']/form/section/section/section[2]/div[1]/div[1]/div/div[2]")).click();
