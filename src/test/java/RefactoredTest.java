@@ -23,7 +23,7 @@ public class RefactoredTest extends BaseTest {
         mainPage.fillSearchForm("Нижегородская область");
         mainPage.searcheableElement.click();
         checkFillFieldByText("Нижегородская область", mainPage.regionButton);
-        Wait<WebDriver> wait = new WebDriverWait(driver, 10, 6000);
+        Wait<WebDriver> wait = new WebDriverWait(driver, 10, 1000);
         wait.until(ExpectedConditions.visibilityOf(mainPage.footer));
         scrollToElement(mainPage.footer);
         Thread.sleep(2000);
@@ -37,18 +37,19 @@ public class RefactoredTest extends BaseTest {
 
     @Test
     public void testScenario2() throws Exception {
+        Wait<WebDriver> wait = new WebDriverWait(driver, 10, 1000);
         driver.get(baseUrl);
         driver.manage().window().maximize();
 //Нажатие на кнопку "Застраховать себя и имущество"
-        Wait<WebDriver> wait = new WebDriverWait(driver, 10, 6000);
-
         MainPage mainPage = new MainPage(driver);
-
+        scrollToElement(mainPage.insureYourselfButton);
+        Thread.sleep(1000);
         mainPage.insureYourselfButton.click();
 //Нажатие на кнопку "Страхование путешественников"
-        wait.until(ExpectedConditions.visibilityOf(mainPage.insureYourselfButton));
+        wait.until(ExpectedConditions.visibilityOf(mainPage.travelersInsuranceButton));
         mainPage.travelersInsuranceButton.click();
 //Проверка наличия на странице заголовка
+
         TravelerEnsurancePage travelerEnsurancePage = new TravelerEnsurancePage(driver);
         checkFillFieldByText("Страхование путешественников", travelerEnsurancePage.title);
 //Нажать оформить онлайн
@@ -82,7 +83,7 @@ public class RefactoredTest extends BaseTest {
         checkFillField("Петров", formPage.surname);
         checkFillField("Петр", formPage.name);
         checkFillField("Петрович", formPage.middlename);
-        checkFillFieldByText("11.09.1999", formPage.birthDate);
+        checkFillField("11.09.1999", formPage.birthDate);
         checkFillField("1111", formPage.passport_series);
         checkFillField("123456", formPage.passport_number);
         checkFillField("11.09.2017", formPage.issueDate);

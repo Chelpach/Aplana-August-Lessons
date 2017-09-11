@@ -45,10 +45,10 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//*[@class='social__icon social__icon_type_ok']")
     public WebElement ok;
 
-    @FindBy(css = ".kit-link.kit-link_pseudo.kit-link_color_black.alt-menu-collapser__link")
+    @FindBy(xpath = "//span[contains(@class,'multiline')]/*[contains(text(),'Застраховать себя')]")
     public WebElement insureYourselfButton;
 
-    @FindBy(css = ".kit-link.kit-link_color_black.alt-menu-list__link.alt-menu-list__link_level_1")
+    @FindBy(xpath ="//a[@href='/portalserver/sb-portal-ru/ru/person/bank_inshure/insuranceprogram/life/travel']")
     public WebElement travelersInsuranceButton;
 
     public MainPage(WebDriver driver) {
